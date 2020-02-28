@@ -47,7 +47,13 @@
                         <a class="nav-link" href="#">news</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('login')}}">login</a>
+                        @guest
+                            <a class="nav-link" href="{{route('login')}}">login</a>
+                        @endguest
+                        @auth
+                            <a class="nav-link" href="{{route('login')}}">Hi! {{ Auth::user()->name }}</a>
+                        @endauth
+
                     </li>
                 </ul>
             </div>
