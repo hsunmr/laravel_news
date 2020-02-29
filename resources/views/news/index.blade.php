@@ -15,7 +15,7 @@
             </a>
             <p class="post-meta">
                 Posted by
-                {{--  <a href="#">{{$post->user->name}}</a>  --}}
+                <a href="#">{{$new->user->name}}</a>
                 on {{$new->created_at->toFormattedDateString()}}
             </p>
         </div>
