@@ -6,27 +6,29 @@
     </header>
     <section class="container-fluid p-5" id="home-content">
         <h3 class="text-center">HOT NEWS</h3>
+        @foreach ($news as $new)
         <div class="item p-3">
             <div class="row">
+                @if($loop->index % 2 == 0)
                 <div class="col-md">
-                    <img class='w-100'src="https://via.placeholder.com/600x350" alt="">
+                    <img class='w-100'src="{{asset('uploads/news/' . $new->image)}}" alt="">
                 </div>
                 <div class="col-md">
-                   tesxt
+                    <h3>{{$new->title}}</h3>
+                   {{$new->content}}
+                </div>        
+                @else
+                <div class="col-md">
+                    <h3>{{$new->title}}</h3>
+                   {{$new->content}}
+                </div>   
+                <div class="col-md">
+                    <img class='w-100'src="{{asset('uploads/news/' . $new->image)}}" alt="">
                 </div>
+                @endif
             </div>
         </div>
-        <div class="item p-3">
-            <div class="row">
-                <div class="col-md">
-                   tesxt
-                </div>
-                <div class="col-md">
-                    <img class='w-100'src="https://via.placeholder.com/600x350" alt="">
-                </div>
-            </div>
-        </div>
-
+        @endforeach
     </section>
 @endsection
 

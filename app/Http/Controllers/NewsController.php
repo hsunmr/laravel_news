@@ -13,6 +13,10 @@ class NewsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index', 'show']);
+    }
     public function index()
     {
         $news = News::all();
@@ -72,7 +76,9 @@ class NewsController extends Controller
      */
     public function show($id)
     {
-        //
+        $news = News::find($id);
+        //dd($news);
+        return view('news.view',compact('news'));
     }
 
     /**

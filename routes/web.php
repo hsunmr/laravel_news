@@ -11,12 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/','HomeController@index')->name('home');
 
-Route::resource('news', 'NewsController');
-
+Route::resource('/news', 'NewsController');
+Route::post('/comment/{new_id}','CommentController@store')->name('comment.store') ->middleware('auth');
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
