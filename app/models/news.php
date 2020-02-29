@@ -19,6 +19,13 @@ class news extends Model
     {
         return $this->hasMany('App\models\comment');
     }
+
+    public function categories()
+    {
+        return $this->belongsToMany('App\models\Category', 'news_category');
+    }
+        
+    
     
     
     

@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<h2 class="text-center">新聞列表</h2>
 <!-- Main Content -->
 <div class="container">
     @if (session('success'))
@@ -11,6 +12,25 @@
         </button>
       </div>
     @endif
+</div>
+<div class="container mt-2 mb-5">
+    <form action="{{route('news.index')}}" method="get">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <select name="categories" id="categories" class="form-control">
+                    <option value="">全部</option>
+                    @foreach ($categories as $category)
+                        <option value="{{$category->id}}">{{$category->name}}</option>
+                    @endforeach
+                    
+                </select>
+            </div>
+            <div class="col-md-2">
+                <input type="submit" value="搜尋" class="btn btn-outline-primary form-control">
+            </div>
+        </div>
+
+    </form>
 </div>
 <div class="container">
 <div class="row">

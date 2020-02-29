@@ -21,6 +21,14 @@
             <input type="text" class="form-control" id="title" name="title">
         </div>
         <div class="form-group">
+            <label for="title">Category</label>
+            <select multiple name="categories[]" class="form-control">
+              @foreach ($categories as $category)
+                <option value="{{$category->id}}">{{$category->name}}</option>
+              @endforeach
+            </select>
+          </div>
+        <div class="form-group">
             <label for="image">Image</label>
             <input type="file" name="image" accept="image/*" class="form-control file-upload mb-3" id="image" >
         </div>

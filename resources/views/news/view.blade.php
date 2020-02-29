@@ -19,6 +19,11 @@
                     <h2 class="news-title">
                         {{$news->title}}
                     </h2>
+                    <h4>
+                    @foreach ($news->categories as $category)
+                        #{{$category->name}}
+                    @endforeach
+                    </h4>
                     <img class="w-100" src="{{ asset('uploads/news/' . $news->image) }}">
                 </a>
                 <h3 class="post-subtitle">

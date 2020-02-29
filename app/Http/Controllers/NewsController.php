@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\models\News;
+use App\models\Category;
 use Illuminate\Http\Request;
 use Image;
 
@@ -19,9 +20,13 @@ class NewsController extends Controller
     }
     public function index()
     {
-        $news = News::orderby('created_at','desc')->get();
-
-        return view('news.index',compact('news'));
+        if(!empty($_GET['categories'])){
+            $news = Category::find($_GET['categories'])->news;
+        }else{
+            $news = News::orderby('created_at', 'desc')->get();      
+        }
+        $categories = Category::all();
+        return view('news.index',compact('news','categories'));
     }
 
     /**
@@ -31,7 +36,8 @@ class NewsController extends Controller
      */
     public function create()
     {
-        return view('news.create');
+        $categories = Category::all();
+        return view('news.create',compact('categories'));
     }
 
     /**
@@ -46,6 +52,7 @@ class NewsController extends Controller
         request()->validate([
             'title' => 'required',
             'content' => 'required',
+            'categories' => 'required',
             'image'=>['required','image'],
         ]);
         if (!file_exists('uploads/news')) {
@@ -64,6 +71,9 @@ class NewsController extends Controller
             'user_id' => auth()->user()->id
             
         ]);
+        foreach (request('categories') as $category) {
+            $news->categories()->attach($category);
+        }
         session()->flash('success', 'News was successfully created!');
         return redirect('/news');
     }
