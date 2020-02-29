@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\models\News;
 use Illuminate\Http\Request;
+use Image;
 
 class NewsController extends Controller
 {
@@ -50,12 +51,13 @@ class NewsController extends Controller
 
         $path = public_path() . '/uploads/news/';
         $fileName = time() . '.' . $file->getClientOriginalExtension();
-        $file->move($path, $fileName);
+        Image::make($file)->crop(300,200)->save($path . $fileName);
 
         $news = News::create([
             'title' => request('title'),
             'image'=>$fileName,
             'content' => request('content'),
+            'user_id' => auth()->user()->id
             
         ]);
         session()->flash('success', 'News was successfully created!');
