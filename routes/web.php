@@ -15,4 +15,6 @@ Route::get('/','HomeController@index')->name('home');
 
 Route::resource('/news', 'NewsController');
 Route::post('/comment/{new_id}','CommentController@store')->name('comment.store') ->middleware('auth');
+Route::get('/category','CategoryController@index')->name('category.index') ->middleware('auth');
+Route::post('/category','CategoryController@store')->name('category.store') ->middleware('auth');
 Auth::routes();

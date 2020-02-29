@@ -10,7 +10,7 @@
         <div class="item p-3">
             <div class="row">
                 @if($loop->index % 2 == 0)
-                <div class="col-md">
+                <div class="col">
                     <img class='w-100'src="{{asset('uploads/news/' . $new->image)}}" alt="">
                 </div>
                 <div class="col-md">
